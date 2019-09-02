@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration debug="false">
+
+    <!-- Levels -->
+
+    <property name="rootLevel" value="INFO"/>
+
+    <!-- Properties -->
+
+    <property name="charset" value="UTF-8"/>
+    <property name="pattern" value="%d{HH:mm:ss.SSS} [%-5level] %-32.32thread{32} | %logger - %msg%n"/>
+
+    <property name="logPath" value="${catalina.base:-.}/logs"/>
+    <property name="logName" value="incentro"/>
+
+    <!-- Appenders -->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>${charset}</charset>
+            <Pattern>${pattern}</Pattern>
+        </encoder>
+    </appender>
+    <appender name="ASYNC_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="STDOUT"/>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <charset>${charset}</charset>
+            <Pattern>${pattern}</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logPath}/${logName}.%d{yyyy-MM-dd}.log</FileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="ASYNC_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <root level="${rootLevel}">
+        <appender-ref ref="ASYNC_STDOUT"/>
+        <appender-ref ref="ASYNC_FILE"/>
+    </root>
+
+</configuration>

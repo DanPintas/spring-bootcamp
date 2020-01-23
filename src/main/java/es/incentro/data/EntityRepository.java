@@ -1,12 +1,12 @@
 package es.incentro.data;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import es.incentro.repo.BaseRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
 
 @NoRepositoryBean
-public interface EntityRepository<T> extends JpaRepository<T, Long> {
+public interface EntityRepository<T> extends BaseRepository<T, Long> {
 
     List<Person> findByNameStartsWithIgnoreCase(String name);
 

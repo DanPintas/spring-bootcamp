@@ -2,6 +2,9 @@
 <!DOCTYPE xml>
 <configuration debug="false">
 
+    <logger name="org.hibernate.SQL" level="debug" />
+    <logger name="org.hibernate.type" level="trace" />
+
     <!-- Levels -->
 
     <property name="rootLevel" value="INFO"/>
